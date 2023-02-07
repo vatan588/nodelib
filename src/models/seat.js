@@ -15,6 +15,11 @@ var seatSchema = new Schema({
     slot_hours:  {type: Number, default: 0},
     _id: false,
   }]
+},{
+  writeConcern: {
+    j: true,
+    wtimeout: 2000
+  }
 });
 seatSchema.plugin(beautifyUnique);
 //on every save, add the date

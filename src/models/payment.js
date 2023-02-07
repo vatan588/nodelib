@@ -15,6 +15,11 @@ var paymentSchema = new Schema({
   payment_month:{type: String, default:null},
   payment_year:{type: String, default:null},
   payment_date: {type: Date, default: new Date()},
+},{
+  writeConcern: {
+    j: true,
+    wtimeout: 2000
+  }
 });
 paymentSchema.plugin(beautifyUnique);
 //on every save, add the date
