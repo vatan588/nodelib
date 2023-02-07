@@ -1,0 +1,7 @@
+{
+    "mongodb": {
+      "database": "v1",
+      "connection": "mongodb+srv://vatan:123456Admin@cluster0.zdzky.mongodb.net/v1?retryWrites=true&w=majority"
+    },
+    "secret": "T199$a99s"
+}
