@@ -83,8 +83,16 @@ router.delete(
 )
 router.get(
 	'/getAllUsers',
+	controller.userAuthenticate,
 	controller.getAllusers
 )
+router.get(
+	'/getStudent/:id',
+	controller.userAuthenticate,
+	controller.getStudentDataWithPayment
+)
+
+
 
 // router.post(
 // 	'/match_otp',

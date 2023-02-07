@@ -382,7 +382,6 @@ module.exports = {
 
 
 	updateUserAndUpdateSeats: function (req, res) {
-
 		let userForUpdation = mongoose.Types.ObjectId(req.body._id);
 		User.findByIdAndUpdate({ _id: userForUpdation }, req.body, { new: true }, function (err, result) {
 			let responseData = ({
@@ -404,6 +403,29 @@ module.exports = {
 			});
 			req.responseData = responseData
 			utils.success(req, res);
+		})
+	},
+
+
+	getStudentDataWithPayment: function (req, res) {
+		let student_id = mongoose.Types.ObjectId(req.params.id);
+		User.findOne({ _id: student_id }, req.body, { new: true }, function (err, result) {
+			let responseData = ({
+				message: "User Updated Successfully.",
+				student: result
+			})
+			Payment.find({ student_id: req.params.id }, function (err, obj) {
+				if (err) {
+					req.errorMsg = err
+					utils.error(req, res)
+				} else {
+					responseData.paymenHistory = obj;
+					req.responseData = responseData
+					utils.success(req, res)
+
+				}
+			});
+
 		})
 	},
 
