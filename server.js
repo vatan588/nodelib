@@ -47,7 +47,7 @@ cron.schedule("30 11 23 3 * *", function() {
 
 const cors = require('cors');
 const corsOptions ={
-    origin:'http://localhost:3001', 
+    origin:'*', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
@@ -69,7 +69,7 @@ app.use('/api', apiRouter);
 
 initDb(function (err) {
     console.log("yes");
-    app.listen(3000);
-    //app.listen(process.env.PORT);
+    //app.listen(3000);
+    app.listen(process.env.PORT);
 });
 
