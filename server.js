@@ -69,7 +69,7 @@ app.use('/api', apiRouter);
 
 initDb(function (err) {
     console.log("yes");
-    //app.listen(3000);
-    app.listen(process.env.PORT);
+    app.listen(3000);
+    //app.listen(process.env.PORT);
 });
 

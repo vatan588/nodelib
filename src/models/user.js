@@ -27,11 +27,12 @@ var userSchema = new Schema({
   fees_status: { type: String, default: null },
   payment_type: { type: String, default: null },
   created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now }
+  updated_at: { type: Date, default: Date.now },
+  account_type: { type: String, default: "active"}
 }, {
   writeConcern: {
     j: true,
-    wtimeout: 2000
+    wtimeout: 2500
   }
 });
 

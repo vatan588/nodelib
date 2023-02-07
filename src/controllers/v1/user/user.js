@@ -348,7 +348,7 @@ module.exports = {
 	deleteUser: function (req, res) {
 		// console.log("req", req);
 		let id = mongoose.Types.ObjectId(req.params.id)
-		
+
 
 		User.findByIdAndDelete(id, function (err, result) {
 			if (err) {
@@ -368,7 +368,7 @@ module.exports = {
 						})
 						req.responseData = responseData
 						utils.success(req, res)
-		
+
 					}
 				});
 				req.responseData = responseData
@@ -376,8 +376,35 @@ module.exports = {
 
 			}
 		})
-		
 
+
+	},
+
+
+	updateUserAndUpdateSeats: function (req, res) {
+
+		let userForUpdation = mongoose.Types.ObjectId(req.body._id);
+		User.findByIdAndUpdate({ _id: userForUpdation }, req.body, { new: true }, function (err, result) {
+			let responseData = ({
+				message: "User Updated Successfully.",
+
+			})
+			Seat.updateOne({ booked_slots: { $elemMatch: { student_id: req.params.id } } }, { "$pull": { "booked_slots": { "student_id": req.params.id } } }, { safe: true, multi: true }, function (err, obj) {
+				if (err) {
+					req.errorMsg = err
+					utils.error(req, res)
+				} else {
+					let responseData = ({
+						message: "success"
+					})
+					req.responseData = responseData
+					utils.success(req, res)
+
+				}
+			});
+			req.responseData = responseData
+			utils.success(req, res);
+		})
 	},
 
 	getAllSeats: function (req, res) {

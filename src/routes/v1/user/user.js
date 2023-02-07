@@ -56,6 +56,11 @@ router.post(
 	controller.userAuthenticate,
 	controller.userUpdate
 )
+router.post(
+	'/userUpdate/:id',
+	controller.userAuthenticate,
+	controller.updateUserAndUpdateSeats
+)
 router.get(
 	'/getAllSeats',
 	controller.userAuthenticate,
