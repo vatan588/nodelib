@@ -15,6 +15,7 @@ var config = require('../../../../config.json');
 const mongoose = require('mongoose');
 const Payment = require('../../../models/payment');
 const Seat = require('../../../models/seat');
+const Contact = require('../../../models/contact');
 
 class UserClass {
 
@@ -259,6 +260,51 @@ module.exports = {
 				utils.error(req, res)
 			}
 
+
+		}).catch(err => {
+			utils.error(req, res)
+			console.log("errpr");
+		})
+	},
+
+
+	
+	contactUs: function (req, res) {
+		// console.log("req", req);
+		let data = Contact(req.body);
+		data.save((err, result) => {
+			let responseData = ({
+				message: "Successfully.",
+			})
+			req.responseData = responseData
+			utils.success(req, res)
+		})
+	},
+
+	contactUpdate: function (req, res) {
+		// console.log("req", req);
+		let contactForUpdation = mongoose.Types.ObjectId(req.body._id);
+		Contact.findByIdAndUpdate({ _id: contactForUpdation }, req.body, { new: true }, function (err, result) {
+			let responseData = ({
+				message: "Updated Successfully.",
+			})
+			req.responseData = responseData
+			utils.success(req, res);
+		})
+
+
+	},
+
+	getContactUs: function (req, res) {
+		// console.log("req", req);
+		Contact.find().sort({ _id: -1 }).then(response => {
+			// console.log("res", response);
+			let responseData = ({
+				message: "All Enquiries.",
+				data: response
+			})
+			req.responseData = responseData
+			utils.success(req, res)
 
 		}).catch(err => {
 			utils.error(req, res)

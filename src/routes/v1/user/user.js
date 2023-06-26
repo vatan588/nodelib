@@ -36,6 +36,19 @@ router.post(
 	'/login',
 	controller.userLogin
 )
+router.post(
+	'/contact',
+	controller.contactUs
+)
+router.post(
+	'/updateContact',
+	controller.contactUpdate
+)
+router.get(
+	'/getAllcontact',
+	controller.getContactUs
+)
+
 // router.post(
 // 	'/add_user',
 // 	//authenticate.adminAuthenticate,
